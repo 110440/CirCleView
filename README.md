@@ -1,2 +1,2 @@
 # CirCleView
-scrolleView 无循 轮播 
+scrolleView 无限循环 轮播 
