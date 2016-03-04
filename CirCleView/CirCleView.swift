@@ -51,6 +51,13 @@ class CirCleView:UIView , UIScrollViewDelegate {
         return view
     }()
     
+    private lazy var pageCtl:UIPageControl = {
+        let h = CGFloat(30)
+        let rect = CGRect(x: 0, y: self.bounds.size.height - h , width: self.bounds.size.width, height: h)
+        let ctl = UIPageControl(frame: rect)
+        return ctl
+    }()
+    
     weak var dataSource:CirCleViewDataSource?
     weak var delegate:CirCleViewDelegate?
     
@@ -83,6 +90,8 @@ class CirCleView:UIView , UIScrollViewDelegate {
         self.contentScrollView.addSubview(thirdPageView)
         self.reloadData()
         self.createTimer()
+        
+        self.addSubview(self.pageCtl)
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -114,6 +123,9 @@ class CirCleView:UIView , UIScrollViewDelegate {
         dataSource.cirCleView(self, willShowView: self.secondPageView, forIndex: secondIndex)
         dataSource.cirCleView(self, willShowView: self.thirdPageView , forIndex: thirdIndex)
         
+        //
+        self.pageCtl.numberOfPages = self.count
+        self.pageCtl.currentPage = self.currentIndex
     }
     
     //MARK: UIScrollViewDelegate
@@ -144,9 +156,8 @@ class CirCleView:UIView , UIScrollViewDelegate {
     // setContentOffset 动画true，会触发的方法
     func scrollViewDidEndScrollingAnimation(scrollView: UIScrollView) {
         self.currentIndex = self.thirdIndex
-        self.reloadData()
-        
         self.delegate?.cirCleView?(self, didShowPageIndex: self.currentIndex)
+        self.reloadData()
     }
     
     //MARK: action

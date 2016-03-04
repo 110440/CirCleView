@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController ,CirCleViewDataSource,CirCleViewDelegate {
     
-    var imageNameArray = ["tt1.jpg","tt2.jpg","tt3.jpg"]
+    var imageNameArray = ["tt1.jpg","tt2.jpg","tt3.jpg","tt4.jpg"]
     var cirView:CirCleView?
     
     override func viewDidLoad() {
